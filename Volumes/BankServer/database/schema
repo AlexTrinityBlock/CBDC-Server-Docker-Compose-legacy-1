@@ -1,0 +1,17 @@
+CREATE TABLE USER(
+   id INTEGER PRIMARY KEY AUTOINCREMENT,
+   user_name        TEXT                NOT NULL,
+   balance          INT     DEFAULT 0   NOT NULL,
+   double_spending          INT     DEFAULT 0   NOT NULL,
+   password_hash    CHAR(256)           NOT NULL,
+   user_uuid        CHAR(36)            NOT NULL
+);
+
+CREATE TABLE CURRENCY(
+   id INTEGER PRIMARY KEY AUTOINCREMENT,
+   currency          TEXT                NOT NULL,
+   deposited         INT     DEFAULT 0           ,
+   hidden_user_info  TEXT                        ,
+   binary_string     TEXT                        ,
+   double_spending   INT     DEFAULT 0           
+);

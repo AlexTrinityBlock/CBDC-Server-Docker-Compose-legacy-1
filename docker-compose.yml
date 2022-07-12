@@ -1,0 +1,54 @@
+#docker-compose版本
+version: "3.4"
+#服務，不過這裡唯一的服務就是firefox瀏覽器
+services:
+  
+  #服務名稱，如果我們要登入容器是要輸入服務名稱的，隨意取名即可
+  bank-server:
+    #這個是我們的映像檔名稱，可以自己選擇，當映像檔建立時就會是bank-server版本0.0
+    image: bank-server:0.1
+    #用在這個資料夾下的Dockerfile建立映像檔
+    build: ./bank-server/
+    #要啟動這個，才能在關閉終端後仍然繼續運作容器
+    tty: true
+    #與容器外的資料夾共通的部分
+    volumes:
+      - ./Volumes/BankServer:/app
+    # 開啟 8080 port 對外
+    ports:
+      - "8080:8080"
+    # 啟動後指令
+    command: "flask run --port 8080  --host=0.0.0.0"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+
+  #服務名稱，如果我們要登入容器是要輸入服務名稱的，隨意取名即可
+  store-server:
+    #這個是我們的映像檔名稱，可以自己選擇，當映像檔建立時就會是 store-server版本0.0
+    image: store-server:0.1
+    #用在這個資料夾下的Dockerfile建立映像檔
+    build: ./store-server/
+    #要啟動這個，才能在關閉終端後仍然繼續運作容器
+    tty: true
+    #與容器外的資料夾共通的部分
+    volumes:
+      - ./Volumes/StoreServer:/app
+    # 開啟 8081 port 對外
+    ports:
+      - "8081:8081"
+    # 啟動後指令
+    command: "flask run --port 8081  --host=0.0.0.0"
+    #
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
+
+networks:
+  vpcbr:
+    driver: bridge
+    # external: true
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
