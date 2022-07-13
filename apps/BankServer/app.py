@@ -114,20 +114,23 @@ def getCurrency():
 #存錢
 @app.route('/deposit',methods=['POST'])
 def deposit():
-    bankPrivateKey=CryptUtil.bytesToBase64String(CryptUtil.readBytes("PrivateKey.pem"))
-    DepositJson:dict=json.loads(request.values['Deposit'])
-    HiddenUserInfoList=DepositJson["hidden_user_info"]
-    Currency=CryptUtil.Base64RSADecrypt( DepositJson["CipherCurrency"],bankPrivateKey)
-    #Check if it's valid coin
-    if VerifyUtil.checkIfCurrencyDeposited(Currency) or  not (VerifyUtil.checkCurrencyIsReal(Currency)):
-        print("Coin: ",Currency,"is Deposited")
-        double_spendiner=VerifyUtil.findUserInfoFromHiddenInfoByCurrency(Currency,HiddenUserInfoList)
-        SQLiteUtil.setDoubleSpenderbyUserID(double_spendiner)
-        SQLiteUtil.setCurrencyDoubleSpending(Currency)
-        return "Fail"
-    else:
-        SQLiteUtil.setCurrencyDeposited(Currency,HiddenUserInfoList)
-        return "Success"
+    try:
+        bankPrivateKey=CryptUtil.bytesToBase64String(CryptUtil.readBytes("PrivateKey.pem"))
+        DepositJson:dict=json.loads(request.values['Deposit'])
+        HiddenUserInfoList=DepositJson["hidden_user_info"]
+        Currency=CryptUtil.Base64RSADecrypt( DepositJson["CipherCurrency"],bankPrivateKey)    
+        #Check if it's valid coin
+        if VerifyUtil.checkIfCurrencyDeposited(Currency) or  not (VerifyUtil.checkCurrencyIsReal(Currency)):
+            print("Coin: ",Currency,"is Deposited")
+            double_spendiner=VerifyUtil.findUserInfoFromHiddenInfoByCurrency(Currency,HiddenUserInfoList)
+            SQLiteUtil.setDoubleSpenderbyUserID(double_spendiner)
+            SQLiteUtil.setCurrencyDoubleSpending(Currency)
+            return "Fail"
+        else:
+            SQLiteUtil.setCurrencyDeposited(Currency,HiddenUserInfoList)
+            return "Success"
+    except Exception as e :
+        return "Decrypt fail"
 
 #重置資料庫
 @app.route('/refresh-database',methods=['GET'])

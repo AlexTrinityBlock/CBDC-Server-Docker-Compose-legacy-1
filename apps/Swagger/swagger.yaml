@@ -54,8 +54,39 @@ paths:
               type: object
               properties:
                 cipher_user_input:
-                  type: string
-              
+                  type: string      
+      responses:
+        200:
+          description: 收到回傳訊息。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: 領取成功失敗的狀態
+                    example: Success/Fail/Decrypt fail
+                  cipher_currency:
+                    type: string
+                    description: 加密後的貨幣
+                    example: ASDASEW445323SCCFFD3232==
+
+  /deposit:
+    post:
+      tags:
+      - "銀行API"
+      summary: 存入貨幣。
+      requestBody:
+        description: 存入貨幣，該輸入為RSA加密的內容。
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                Deposit:
+                  type: string      
       responses:
         200:
           description: 收到回傳訊息。
