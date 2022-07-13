@@ -11,6 +11,8 @@ servers:
 tags:
 - name: "銀行API"
   description: "從銀行領錢與存款的API。"
+- name: "商店API"
+  description: "商店接受支付的API與商店存入銀行的API。"
 
 paths:
   /public-key/user/withdraw:
@@ -95,11 +97,7 @@ paths:
               schema: 
                 type: object
                 properties:
-                  Status:
+                  result:
                     type: string
                     description: 領取成功失敗的狀態
                     example: Success/Fail/Decrypt fail
-                  cipher_currency:
-                    type: string
-                    description: 加密後的貨幣
-                    example: ASDASEW445323SCCFFD3232==
