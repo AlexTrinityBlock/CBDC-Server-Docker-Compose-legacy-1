@@ -62,16 +62,25 @@ def transportPubblicKey():
         result="[server]Public Key no found,try to use CryptUtil.RSAKeyPairFilesGenerator()"
     return json.dumps(result)
     
+#領錢
 @app.route('/get-currency',methods=['POST'])
 def getCurrency():
 
     result=dict()
     bankPrivateKey:bytes=CryptUtil.readBytes("PrivateKey.pem")
     
-    # try:
     cipher_user_input:str=request.values['cipher_user_input']
-    user_rsa_public_key=CryptUtil.Base64StringToBytes(request.values['user_rsa_public_key'])
-    plain_user_input=(CryptUtil.RSAdecrypto(CryptUtil.Base64StringToBytes(cipher_user_input),bankPrivateKey)).decode("utf-8")
+    
+    #解密失敗終止流程
+    try:
+        user_rsa_public_key=CryptUtil.Base64StringToBytes(request.values['user_rsa_public_key'])
+        plain_user_input=(CryptUtil.RSAdecrypto(CryptUtil.Base64StringToBytes(cipher_user_input),bankPrivateKey)).decode("utf-8")
+    except Exception as e:
+        result={
+            "Status":"Decrypt fail"            
+        }
+        return json.dumps(result)
+
     user_input_json=json.loads(plain_user_input)
     user_name=user_input_json["user_name"]
     if AccountUtil.checkUserPassword(user_name,user_input_json["user_password"]):
@@ -102,6 +111,7 @@ def getCurrency():
         }
     return json.dumps(result)
 
+#存錢
 @app.route('/deposit',methods=['POST'])
 def deposit():
     bankPrivateKey=CryptUtil.bytesToBase64String(CryptUtil.readBytes("PrivateKey.pem"))
@@ -119,6 +129,7 @@ def deposit():
         SQLiteUtil.setCurrencyDeposited(Currency,HiddenUserInfoList)
         return "Success"
 
+#重置資料庫
 @app.route('/refresh-database',methods=['GET'])
 def refreshDatabase():
     SQLiteUtil.createNewDatabase()

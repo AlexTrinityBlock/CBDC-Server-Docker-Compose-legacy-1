@@ -35,3 +35,30 @@ paths:
                     description: 銀行的RSA公鑰
                     example: LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBeE1mcWs1azhSVmRWZGx4MG1ZVGMNCjBoa1c5cDRkaDVOd3JDZnBIdkVXeTh6Y0Y3dEJ6bFJqRzQ0c2RKeUJBSmFmMzNJdFhLUnJVQ2FvaVBTUUxTNkQNCmZPL1liMkc3eDEybVFiZzR5UDVoL1B5WHZJaDh2cEx5S2tHbnF2K3lIQ2YwRTFQZTBkUkFvcXFmdEIvc2V5YUUNClNJWXA4U1hmTVZCNWNGZVNQRXY1MTQ5dEk4cld3RHVBaGlsZWY4LzlBcEdlOXhQVnRiMEFDczB1aHdSSTNvVUwNClZTWmRNWmxWUTNBbEZrN2RSaDdHVno3UGxCVVZQNjJPTXl5RDBiNUxBTVYxOEQ3T2VkZ2pMT1pGc2l5cHh6Q20NCmJVRUFjaE00bjF0R0o1azFBd3U3WDBsakppdXVDdUx6Z29GWGlvQ2pLS2I5L2dRV3h4ZGtrQmxsRzUyb3ROYjUNCjlRSURBUUFCDQotLS0tLUVORCBQVUJMSUMgS0VZLS0tLS0=
 
+  /refresh-database:
+    get:
+      tags:
+      - "銀行API"
+      summary: 清除銀行資料庫。
+      description: 
+
+  /get-currency:
+    post:
+      tags:
+      - "銀行API"
+      summary: Creates a new user.
+
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                cipher_user_input:
+                  type: string
+              
+      responses:
+        201:
+          description: Created
