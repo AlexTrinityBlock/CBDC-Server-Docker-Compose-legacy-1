@@ -6,6 +6,7 @@ from ast import Import
 from locale import currency
 from multiprocessing.connection import Client
 import flask
+from flask_cors import CORS
 import CryptUtil
 import AccountUtil
 import CurrencyUtil
@@ -18,6 +19,7 @@ from datetime import timedelta
 from flask import render_template
 
 app = flask.Flask(__name__)
+CORS(app)
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
 app.config['SECRET_KEY'] = os.urandom(24)
 

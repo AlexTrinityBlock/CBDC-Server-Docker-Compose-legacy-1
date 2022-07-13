@@ -1,34 +1,35 @@
 openapi: 3.0.0
 info:
-  title: 銀行端API
+  title: CBDC數位貨幣測試API系統
   description: 資訊安全實驗室銀行端API
   version: 0.1.9
 servers:
   - url: http://127.0.0.1:8080
-    description: 銀行API
+    description: 銀行伺服器
+  - url: http://127.0.0.1:8081
+    description: 商店伺服器
 tags:
-- name: "pet"
-  description: "Everything about your Pets"
+- name: "銀行API"
+  description: "從銀行領錢與存款的API。"
 
 paths:
   /public-key/user/withdraw:
     get:
       tags:
-      - "pet"
-      summary: Returns a list of users.
-      description: Optional extended description in CommonMark or HTML.
-      parameters:
-        - in: header
-          name: Access-Control-Allow-Origin
-          schema:
-            type: string
-          required: false
+      - "銀行API"
+      summary: 取得銀行公鑰。
+      description: 
       responses:
         '200':    # status code
           description: A JSON array of user names
           content:
             application/json:
               schema: 
-                type: array
-                items: 
-                  type: string
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: The user ID.
+                  username:
+                    type: string
+                    description: The user name.

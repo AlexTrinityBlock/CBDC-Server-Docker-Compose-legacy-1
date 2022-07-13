@@ -3,8 +3,8 @@ import SQLiteUtil
 import requests
 import json
 
-BankDepositURL='http://10.5.0.5:8080/deposit'
-BankPublicKeyURL:str='http://10.5.0.5:8080/public-key/user/withdraw'
+BankDepositURL='http://10.5.0.2:8080/deposit'
+BankPublicKeyURL:str='http://10.5.0.2:8080/public-key/user/withdraw'
 
 def Deposit():
     CurrencyWithoutDepositedList=SQLiteUtil.findCurrencyWithoutDeposited()

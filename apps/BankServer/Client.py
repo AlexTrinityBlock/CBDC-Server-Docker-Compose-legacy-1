@@ -7,13 +7,13 @@ import string
 import random
 
 #Bank URL
-BankPublicKeyURL:str='http://10.5.0.5:8080/public-key/user/withdraw'
-BankGetCurrencyURL:str='http://10.5.0.5:8080/get-currency'
+BankPublicKeyURL:str='http://10.5.0.2:8080/public-key/user/withdraw'
+BankGetCurrencyURL:str='http://10.5.0.2:8080/get-currency'
 
 #Store URL
-StorePublicKey="http://10.5.0.6:8081/store/public-key/"
-StoreStartTransactionURL="http://10.5.0.6:8081/start-transaction/get-binary-string"
-SendCurrencyToStoreURL="http://10.5.0.6:8081/get-currency"
+StorePublicKey="http://10.5.0.3:8081/store/public-key/"
+StoreStartTransactionURL="http://10.5.0.3:8081/start-transaction/get-binary-string"
+SendCurrencyToStoreURL="http://10.5.0.3:8081/get-currency"
 
 #UserID
 user_name="Alice"

@@ -3,6 +3,7 @@
 # pip install -r requirements.txt 
 from unittest import result
 import flask
+from flask_cors import CORS
 import SQLiteUtil
 import uuid
 import json
@@ -14,6 +15,7 @@ from flask import render_template,Flask,session,request,abort, redirect, url_for
 from datetime import timedelta
 
 app = flask.Flask(__name__)
+CORS(app)
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
 app.config['SECRET_KEY'] = os.urandom(24)
 

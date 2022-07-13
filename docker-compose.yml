@@ -11,7 +11,7 @@ services:
     #這個是我們的映像檔名稱，可以自己選擇，當映像檔建立時就會是bank-server版本0.0
     image: bank-server:0.0
     #用在這個資料夾下的Dockerfile建立映像檔
-    build: ./bank-server/
+    build: ./dockerfiles/bank-server/
     #要啟動這個，才能在關閉終端後仍然繼續運作容器
     tty: true
     #與容器外的資料夾共通的部分
@@ -35,7 +35,7 @@ services:
     #這個是我們的映像檔名稱，可以自己選擇，當映像檔建立時就會是 store-server版本0.0
     image: store-server:0.0
     #用在這個資料夾下的Dockerfile建立映像檔
-    build: ./store-server/
+    build: ./dockerfiles/store-server/
     #要啟動這個，才能在關閉終端後仍然繼續運作容器
     tty: true
     #與容器外的資料夾共通的部分
