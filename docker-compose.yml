@@ -52,7 +52,7 @@ services:
         ipv4_address: 10.5.0.3
 
   #########
-  #文檔服務#
+  #API文檔服務#
   #########
   #服務名稱，如果我們要登入容器是要輸入服務名稱的，隨意取名即可
   swagger-server:
@@ -99,6 +99,25 @@ services:
     networks:
       vpcbr:
         ipv4_address: 10.5.0.5
+
+  #########
+  #程式文檔服務#
+  #########
+  #服務名稱，如果我們要登入容器是要輸入服務名稱的，隨意取名即可
+  mkdocs-server:
+    container_name: mkdocs
+    image: polinux/mkdocs:1.2.3
+    ports:
+      - "8084:8000"
+    environment:
+      LIVE_RELOAD_SUPPORT: 'true'
+      ADD_MODULES: 'fontawesome-markdown mkdocs-git-revision-date-localized-plugin mkdocs-material'
+      FAST_MODE: 'true'
+      DOCS_DIRECTORY: '/app'
+      UPDATE_INTERVAL: 15
+      AUTO_UPDATE: 'true'
+    volumes:
+      - ./apps/MKDocs:/app/
 
 networks:
   #網路名稱為vpcbr，該名稱可以變更。
