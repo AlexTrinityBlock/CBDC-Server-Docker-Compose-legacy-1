@@ -118,6 +118,10 @@ services:
       AUTO_UPDATE: 'true'
     volumes:
       - ./apps/MKDocs:/app/
+    #網路IP設置
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
 
 networks:
   #網路名稱為vpcbr，該名稱可以變更。
