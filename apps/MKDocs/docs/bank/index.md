@@ -104,5 +104,108 @@
 
 [/refresh-database](http://127.0.0.1:8080/refresh-database) ***GET方法***，重置銀行資料庫，用於測試，觸發後跳轉到\銀行首頁。
 
-## Python函數文檔
+## Python自製模塊文檔
 
+### AccountUtil.py
+
+用於檢查使用者密碼是否正確，其中會檢查密碼的SHA256。
+
+`checkUserPassword(userName:str,userInputPassword:str)`
+
+* userName: 字串型別，使用者名稱。
+
+* userInputPassword: 字串型別，使用者密碼。
+
+* return: 布林型別，True代表密碼正確，False代表密碼錯誤。
+
+### CryptUtil.py
+
+輔助加密解密工具，還有進行Hash驗證。
+
+`StringSHA256(KeyStr: str)`
+
+* KeyStr: 字串型別，要轉換成SHA256 Hash的字串。
+
+* return: bytes型別，SHA256 Hash。
+
+`BytesSHA256(KeyBytes: bytes)`
+
+* KeyBytes: bytes型別，SHA256 Hash的bytes。
+
+* return: bytes型別，SHA256 Hash。
+
+`writeBytes(byteMsg, fileName:str)`
+
+* byteMsg: bytes型別，要寫入檔案的bytes。
+
+* fileName: 字串型別，要寫入的檔案路徑。
+
+`readBytes(fileName:str)`
+
+* fileName: 字串型別，要讀取的檔案路徑。
+
+* return: bytes型別，讀入的bytes。
+
+`RSAencrypto(data: bytes, publicKey: bytes)`
+
+以RSA進行加密。
+
+* data: bytes型別，要加密的bytes資料。
+
+* publicKey: RSA公鑰。
+
+* return: bytes型別，加密後的bytes資料。
+
+`RSAdecrypto(data: bytes, privateKey: bytes)`
+
+以RSA進行解密。
+
+* data: bytes型別，要解密的bytes資料。
+
+* privateKey: RSA私鑰。
+
+* return: bytes型別，解密後的bytes資料。
+
+`bytesToBase64String(byteString)`
+
+將bytes轉換成Base64。
+
+* byteString: bytes型別，要轉換成Base64的bytes內容。
+
+* return: 字串型別，轉換後的Base64字串。
+
+`Base64StringToBytes(base64String:str)`
+
+將Base64轉換成bytes。
+
+* base64String: 字串型別，要轉換的Base64。
+
+* return: bytes型別，轉換後的bytes。
+
+`Base64RSAEncrypt(Base64CiphertText:str,Base64PublicKey:str)`
+
+將Base64字串RSA加密。
+
+* Base64CiphertText: 字串型別，要加密的Base64字串。
+
+* Base64PublicKey: 字串型別，Base64RSA公鑰。
+
+* return: 字串型別，加密後的Base64字串。
+
+`Base64RSADecrypt(Base64CiphertText:str,Base64PrivateKey:str)`
+
+將Base64字串RSA解密。
+
+* Base64CiphertText: 字串型別，要解密的Base64字串。
+
+* Base64PrivateKey: 字串型別，Base64RSA私鑰。
+
+* return: 字串型別，解密後的Base64字串。
+
+`RSASignature(StringPlainText:str,privateKey:bytes)`
+
+* StringPlainText: 字串型別，簽章的Base64字串。
+
+* privateKey: bytes型別，簽章用的私鑰。
+
+* return: 字串型別，簽章Base64字串。
