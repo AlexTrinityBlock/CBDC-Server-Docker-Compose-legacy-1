@@ -16,9 +16,11 @@
 
 ## 網頁與API路徑
 
-### 模擬使用者相關
+### 銀行首頁
 
 [/](http://127.0.0.1:8080/) ***GET方法***，提供銀行端前端頁面，由於過往使用flask預設的`Jinja2`模板引擎，之後計畫改成基於[Ajax](https://developer.mozilla.org/zh-TW/docs/Web/Guide/AJAX)或者[Fetch](https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API)的前後端分離架構。
+
+### 模擬使用者相關
 
 [/user](http://127.0.0.1:8080/user) ***GET方法***，模擬使用者進行交易的頁面。
 
