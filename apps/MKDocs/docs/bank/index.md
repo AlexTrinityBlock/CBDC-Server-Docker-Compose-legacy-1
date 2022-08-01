@@ -229,3 +229,85 @@
 先產生新的數位貨幣，然後存入銀行的SQL中。
 
 * return: 字串型別，新產生的數位貨幣。
+
+### SQLiteUtil.py
+
+`createNewDatabase()`
+
+建立新的SQLite資料庫，其實是個檔案，之後將回移動到MySQL上。
+
+`insertUser(user_name_i:str,balance_i:int,password_hash_i:str,user_uuid_i:str)`
+
+加入新的使用者，並且同時加入密碼的hash, 存款, 使用者UUID。
+
+* user_name_i: 字串型別，使用者名稱。
+
+* balance_i: 整數型別，存款金額。
+
+* password_hash_i: 字串型別，密碼Hash。
+
+* user_uuid_i: 字串型別，使用者UUID。
+
+`insertNewCurrency(currency_i:str)`
+
+加入新發行的數位貨幣字串到資料庫。
+
+* currency_i: 字串型別，發行貨幣字串。
+
+`insertCurrencyTable(currency_i:str,withdrawn_i:int,hidden_user_info_i:str,binary_string_i:str)`
+
+加入已經兌換的數位貨幣到資料庫。
+
+* currency_i: 字串型別，數位貨幣字串UUID。
+
+* withdrawn_i: 數字型別，代表是否被領取。
+
+* hidden_user_info_i: 字串型別，用來提取雙花使用者ID的字串。
+
+* binary_string_i: 字串型別，二進位字串。
+
+`creatExampleUser()`
+
+建立範例使用者Alice與Bob。
+
+Alice的密碼是`abc`，Bob的密碼是`def`。
+
+`getPasswordHashByUserName(userNme:str="")`
+
+用使用者的名稱取得使用者密碼的Hash。
+
+* userNme: 字串型別，使用者名稱。
+
+* return: 字串型別，密碼Hash字串。
+
+`getBalanceByUserName(userName:str="")`
+
+用使用者名稱取得存款。
+
+* userName: 字串型別，使用者名稱。
+
+* return: 字串型別，存款金額。
+
+`updateBalanceByUserName(userName:str="",newBalance:int=None)`
+
+用使用者名稱來更新存款餘額。
+
+* userName: 字串型別，使用者名稱。
+
+* newBalance: 整數型別，新的貨幣餘額。
+
+`decreaseBalanceByUserName(userName:str)`
+
+用使用者名稱，扣款1元。
+
+* userName: 字串型別，使用者名稱。
+
+`getUserIDByUserName(userNme:str="")`
+
+用使用者名稱取得使用者ID。
+
+* userNme: 字串型別，使用者名稱。
+
+* return: 字串型別，使用者ID。
+
+``
