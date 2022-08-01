@@ -312,4 +312,54 @@ Alice的密碼是`abc`，Bob的密碼是`def`。
 
 `getDepositedStatusByCurrency(currency:str)`
 
-* currency: 字串型別，
+取得一個錢幣的存入狀態，這個是用於檢查一個錢幣是否已經被儲存過了。
+
+* currency: 字串型別，數位貨幣字串。
+
+`setCurrencyDeposited(currency:str,HiddenUserInfoListString:str)`
+
+把一個已經存入的貨幣標記為已經存入完畢，***deposited***這個參數設置為1的時候，代表說該貨幣已經被存入銀行。
+
+* currency: 字串型別，數位貨幣字串。
+
+* HiddenUserInfoListString: 用來驗證Double spender的字串。
+
+`setCurrencyDoubleSpending(currency:str)`
+
+標註被Double Spending的貨幣。
+
+* currency: 字串型別，數位貨幣字串。
+
+`getHiddenUserInfoByCurrency(currency:str)`
+
+取的一個貨幣的Double Spending驗證字串。
+
+* currency: 字串型別，數位貨幣字串。
+
+`setDoubleSpenderbyUserID(doubleSpenderID:str)`
+
+把發現使用Double Spending的用戶進行標記。
+
+* doubleSpenderID: 字串型別，雙重支付使用者的ID。
+
+`getAllUserInfoForFrontEnd()`
+
+將網頁前端所需要的所有資訊回傳。
+
+`getCurrencyInfoForFrontEnd()`
+
+取得網頁前端所需要的貨幣資訊。
+
+`getDoubleSpendingCurrencyInfoForFrontEnd()`
+
+取得網頁前端所需要的雙重支付貨幣清單。
+
+`getDoubleSpendingUserInfoForFrontEnd()`
+
+取得網頁前端所需要的雙重支付使用者資訊，回傳到前端。
+
+`getNumberOfCurrency(currency:str)`
+
+取得單一貨幣的數量。
+
+* currency: 字串型別，數位貨幣字串。
