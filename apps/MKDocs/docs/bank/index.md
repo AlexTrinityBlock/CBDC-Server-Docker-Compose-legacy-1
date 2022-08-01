@@ -18,7 +18,7 @@
 
 ### 模擬使用者相關
 
-[/](http://127.0.0.1:8080/) ***GET方法***，提供銀行端前端頁面，由於過往使用flask預設的`Jinja2`模板引擎。
+[/](http://127.0.0.1:8080/) ***GET方法***，提供銀行端前端頁面，由於過往使用flask預設的`Jinja2`模板引擎，之後計畫改成基於[Ajax](https://developer.mozilla.org/zh-TW/docs/Web/Guide/AJAX)或者[Fetch](https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API)的前後端分離架構。
 
 [/user](http://127.0.0.1:8080/user) ***GET方法***，模擬使用者進行交易的頁面。
 
@@ -51,6 +51,58 @@
 
 ```json
 {
-    
+    "user_name":"使用者名稱",
+    "user_password":"使用者密碼",
+    "withdrawal_number":"提領的金額",
 }
 ```
+
+在輸入上述資料後，成功提取的每一枚硬幣，都會以下列格式從銀行返回:
+
+***單一枚貨幣***
+
+```json
+{
+    "Currency":"加密後轉Base64的數位貨幣UUID",
+    "BankSignature":"數位貨幣的銀行私鑰簽章",
+}
+```
+
+***整批貨幣(好幾枚數位貨幣)***
+
+當提領成功的狀態:
+
+```json
+{
+    "Status":"Success",
+    "cipher_currency": ["單一枚貨幣1","單一枚貨幣2","單一枚貨幣3"]     
+}
+```
+
+領取失敗:
+
+```json
+{
+    "Status":"Fail",
+}
+```
+
+### 存款API
+
+[/deposit](http://127.0.0.1:8080/deposit) ***POST方法***，讓商店得以將貨幣存入銀行。
+
+```json
+{
+    "Deposit":{
+        "hidden_user_info":"重複支付時就，可以用XOR導出使用者ID的驗證碼。",
+        "CipherCurrency":"加密後轉Base64的貨幣。",
+    }
+}
+```
+
+### 重置資料庫
+
+[/refresh-database](http://127.0.0.1:8080/refresh-database) ***GET方法***，重置銀行資料庫，用於測試，觸發後跳轉到\銀行首頁。
+
+## Python函數文檔
+
