@@ -209,3 +209,23 @@
 * privateKey: bytes型別，簽章用的私鑰。
 
 * return: 字串型別，簽章Base64字串。
+
+### CurrencyUtil.py
+
+`newCurrency()`
+
+建立一顆枚的數位貨幣，採取的是極度不容易重複的[UUID](https://zh.wikipedia.org/zh-tw/%E9%80%9A%E7%94%A8%E5%94%AF%E4%B8%80%E8%AF%86%E5%88%AB%E7%A0%81)。
+
+* return: 字串型別，一串通常獨一無二的字串。
+
+`saveCurrencyToBankSQL(currencyUUID:str)`
+
+將貨幣存入銀行的SQL中。
+
+* currencyUUID: 字串型別，要存入SQL的貨幣。
+
+`issueNewCurrency()`
+
+先產生新的數位貨幣，然後存入銀行的SQL中。
+
+* return: 字串型別，新產生的數位貨幣。
