@@ -310,4 +310,6 @@ Alice的密碼是`abc`，Bob的密碼是`def`。
 
 * return: 字串型別，使用者ID。
 
-``
+`getDepositedStatusByCurrency(currency:str)`
+
+* currency: 字串型別，
